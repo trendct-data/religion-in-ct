@@ -1,0 +1,163 @@
+---
+title: "Rates of religion by county"
+author: "Andrew Ba Tran"
+date: "December 21, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, message=F, warning=F}
+library(ggplot2)   # devtools::install_github("hadley/ggplot2") only if you want subtitles/captions
+library(foreign)
+library(stringr)
+library(dplyr)
+library(tidyr)
+library(rgeos)
+library(maptools)
+library(ggalt)
+library(ggthemes)
+library(albersusa) # devtools::install_github("hrbrmstr/albersusa")
+library(viridis)
+library(scales)
+```
+
+## Prepping the data
+
+```{r prep, message=F, warning=F}
+
+counties <- read.spss("data/religions_counties.SAV", 
+                      to.data.frame = TRUE)
+
+counties$CNTYNAME <- as.character(counties$CNTYNAME)
+counties$CNTYNAME <- sub("County", "", counties$CNTYNAME)
+counties$CNTYNAME <- sub("\\s+$", "", counties$CNTYNAME)
+
+counties_rates <- counties[ , grepl( "RATE" , names( counties ) ) ]
+
+
+cmap <- fortify(counties_composite(), region="fips")
+cmap$id <- as.numeric(cmap$id)
+counties[is.na(counties)] <- 0
+```
+
+## Function to generate a map
+
+```{r map_maker}
+
+religion_map <- function(counties, religion, religion_id) {
+  
+  headline <- ifelse(grepl("RATE", as.character(religion_id)), paste("Rate of", religion, "followers"), paste(religion, "followers"))
+  legend <- ifelse(grepl("RATE", as.character(religion_id)), paste(religion, "per 1,000 residents"), "Followers")
+  
+  counties_sub <- counties
+  
+  names(counties_sub)[names(counties_sub) == religion_id] <- 'for_map'
+  
+  gg <- ggplot()
+  gg <- gg + geom_map(data=cmap, map=cmap,
+                      aes(x=long, y=lat,map_id=id),
+                      color="#2b2b2b", size=0.05, fill=NA)
+  gg <- gg + geom_map(data=counties_sub, map=cmap,
+                      aes(fill=for_map, map_id=FIPS),
+                      color="#2b2b2b", size=0.05)
+  gg <- gg + scale_fill_viridis(name=legend)
+  gg <- gg + coord_proj(us_laea_proj)
+  gg <- gg + labs(title=headline,
+                  caption="TrendCT.org\nSOURCE: Association of Religion Data Archives 2010")
+  gg <- gg + theme_map(base_family="Arial Narrow")
+  gg <- gg + theme(legend.position=c(0.8, 0.25))
+  gg <- gg + theme(plot.title=element_text(face="bold", size=14, margin=margin(b=6)))
+  gg <- gg + theme(plot.subtitle=element_text(size=10, margin=margin(b=-14)))
+  
+  gg
+}
+
+```
+
+```{r evangelicals, fig.width=10, fig.height=6}
+
+religion_map(counties, "Evangelicals", "EVANRATE")
+
+```
+
+```{r catholics, fig.width=10, fig.height=6}
+# congregations: CTHCNG
+# adherants: CTHADH
+religion_map(counties, "Catholicism", "CTHRATE")
+
+```
+
+
+```{r protestant, fig.width=10, fig.height=6}
+# Mainline protestant
+religion_map(counties, "Mainline Protestant", "MPRTRATE")
+
+```
+
+
+```{r episcopal, fig.width=10, fig.height=6}
+
+religion_map(counties, "Episcopal", "ECRATE")
+
+```
+
+
+```{r methodist, fig.width=10, fig.height=6}
+# United methodist church
+religion_map(counties, "Methodist", "UMCRATE")
+
+```
+
+
+```{r baptist, fig.width=10, fig.height=6}
+# American Baptist
+religion_map(counties, "American Baptist", "ABCRATE")
+
+```
+
+```{r southern_baptist, fig.width=10, fig.height=6}
+
+religion_map(counties, "Southern Baptist", "SBCRATE")
+
+```
+
+```{r lutheran, fig.width=10, fig.height=6}
+# Evangelical Lutheran Church
+religion_map(counties, "Lutheran", "ELCARATE")
+
+```
+
+```{r r_judaism, fig.width=10, fig.height=6}
+
+religion_map(counties, "Reform Judaism", "RFRMRATE")
+
+```
+
+```{r c_judaism, fig.width=10, fig.height=6}
+
+religion_map(counties, "Conservative Judaism", "CJUDRATE")
+
+```
+
+```{r muslim, fig.width=10, fig.height=6}
+
+religion_map(counties, "Muslim", "MSLMRATE")
+
+```
+
+
+```{r greek_orthodox, fig.width=10, fig.height=6}
+
+religion_map(counties, "Greek Orthodox", "GRKRATE")
+
+```
+
+
+```{r buddhism, fig.width=10, fig.height=6}
+
+religion_map(counties, "Buddhism", "BUDMRATE")
+
+```

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(foreign)\nlibrary(dplyr)\n\ncounties <- read.spss(\"data/religions_counties.SAV\", \n                      to.data.frame = TRUE)\n\ncounties$CNTYNAME <- as.character(counties$CNTYNAME)\ncounties$CNTYNAME <- sub(\"County\", \"\", counties$CNTYNAME)\ncounties$CNTYNAME <- sub(\"\\\\s+$\", \"\", counties$CNTYNAME)\n\ncounties_rates <- counties[ , grepl( \"RATE\" , names( counties ) ) ]\ncounties_rank <- counties_rates\n\ncounties_rank_names <- counties[c(\"STABBR\", \"CNTYNAME\")]\n\ncounties_rank$STABBR <- NULL\ncounties_rank$CNTYNAME <- NULL\n\nfor (i in 1:ncol(counties_rank)) {\n\n\n    counties_rank[,i] <- rank(-as.numeric(as.character(counties_rank[,i])), na.last=T, )\n    print(colnames(counties_rank[i]))\n\n  \n}\n\ncounties_rank <- cbind(counties_rank_names, counties_rank)\n\nfiltered_rank_ct <- counties_rank %>%\n  filter(STABBR==\"CT\")\n\nfiltered_rank_ct$STABBR <- NULL\n\nrank_ct <- data.frame(t(filtered_rank_ct))\nrank_ct$type <- rownames(rank_ct)\nrownames(rank_ct) <- NULL\ncolumn_names <- filtered_rank_ct$CNTYNAME\ncolumn_names <- c(column_names, \"type\")\ncolnames(rank_ct) <- gsub(\" \", \"\", column_names)\nrank_ct <- subset(rank_ct, type!=\"CNTYNAME\")\n\nfairfield <- subset(rank_ct, as.numeric(as.character(Fairfield)) <=15)\n\n# Fairfield is the 13th highest county for American Carpatho-Russian Orthodox Diocese (ACRORATE)\n\nhartford <- subset(rank_ct, as.numeric(as.character(Hartford)) <=15)\n\n# Fairfield is tied for 14th highest county for Armenian Apostolic Church of America (Catholicosate of Cilicia) (AACARATE)\n\nhartford <- subset(rank_ct, as.numeric(as.character(Hartford)) <=15)\n\n# Hartford is tied for 14th highest county for Armenian Apostolic Church of America (Catholicosate of Cilicia) (AACARATE)\n\nlitchfield <- subset(rank_ct, as.numeric(as.character(Litchfield)) <=15)\n\n# Litchfield is third highest county for United Catholic Church, Inc. (UCTHRATE)\n\nmiddlesex <- subset(rank_ct, as.numeric(as.character(Middlesex)) <=15)\n\n# Middlesex is 13th for highest county for Congregational Christian Churches (CCRATE)\n\nnewhaven <- subset(rank_ct, as.numeric(as.character(NewHaven)) <=15)\n\n# New Haven is 13th for highest county for United Catholic Church, Inc. (UCTHRATE)\n\nwindham <- subset(rank_ct, as.numeric(as.character(Windham)) <=15)\n\n# Windham is fifth for highest county for Reconstructionist Judaism (RJUDRATE)\n\n## OK MAP IT NOW SUCKERRRR\n\n\n",
+    "created" : 1482260070772.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3564610420",
+    "id" : "C1A4CE62",
+    "lastKnownWriteTime" : 1482335092,
+    "last_content_update" : 1482335092960,
+    "path" : "~/Documents/Github/trendct-data/2016/12/religion-in-ct/exploratory.R",
+    "project_path" : "exploratory.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

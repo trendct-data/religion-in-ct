@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1482264225906.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DF91E6A",
+    "lastKnownWriteTime" : 4590057200,
+    "last_content_update" : 1482264225906,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "9ED8C30C",
+        "caption" : "middlesex",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=middlesex&cache_key=9ED8C30C",
+        "displayedObservations" : 1,
+        "environment" : "",
+        "object" : "middlesex",
+        "preview" : 0,
+        "totalObservations" : 1,
+        "variables" : 9
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1482260655179.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AC5ACC02",
+    "lastKnownWriteTime" : 4294967302,
+    "last_content_update" : 1482260655179,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "3C5F7B42",
+        "caption" : "counties_rank",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=counties_rank&cache_key=3C5F7B42",
+        "displayedObservations" : "3149",
+        "environment" : "",
+        "object" : "counties_rank",
+        "preview" : "0",
+        "totalObservations" : "3149",
+        "variables" : "161"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

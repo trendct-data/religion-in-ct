@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)   # devtools::install_github(\"hadley/ggplot2\") only if you want subtitles/captions\n\nlibrary(stringr)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(rgeos)\nlibrary(maptools)\nlibrary(ggalt)\nlibrary(ggthemes)\nlibrary(albersusa) # devtools::install_github(\"hrbrmstr/albersusa\")\nlibrary(viridis)\nlibrary(scales)\n\n\ncounties <- read.spss(\"data/religions_counties.SAV\", \n                      to.data.frame = TRUE)\n\ncounties$CNTYNAME <- as.character(counties$CNTYNAME)\ncounties$CNTYNAME <- sub(\"County\", \"\", counties$CNTYNAME)\ncounties$CNTYNAME <- sub(\"\\\\s+$\", \"\", counties$CNTYNAME)\n\ncounties_rates <- counties[ , grepl( \"RATE\" , names( counties ) ) ]\n\n\ncmap <- fortify(counties_composite(), region=\"fips\")\ncmap$id <- as.numeric(cmap$id)\n\ngg <- ggplot()\ngg <- gg + geom_map(data=cmap, map=cmap,\n                    aes(x=long, y=lat,map_id=id),\n                    color=\"#2b2b2b\", size=0.05, fill=NA)\ngg <- gg + geom_map(data=counties, map=cmap,\n                    aes(fill=EVANRATE, map_id=FIPS),\n                    color=\"#2b2b2b\", size=0.05)\ngg <- gg + scale_fill_viridis(name=\"Uninsured\")\ngg <- gg + coord_proj(us_laea_proj)\ngg <- gg + labs(title=\"U.S. uninsured rate by county in 2014 (18-64)\",\n                subtitle=\"In 2014, states were given the option to expand their Medicaid eligibility to most \\nworking-age adults living at or below 138 percent of poverty.\",\n                caption=\"TrendCT.org\\nSOURCE: Small Area Health Insurance Estimates, U.S. Census\")\ngg <- gg + theme_map(base_family=\"Arial Narrow\")\ngg <- gg + theme(legend.position=c(0.8, 0.25))\ngg <- gg + theme(plot.title=element_text(face=\"bold\", size=14, margin=margin(b=6)))\ngg <- gg + theme(plot.subtitle=element_text(size=10, margin=margin(b=-14)))\ngg\n\n\n## Function\n\nreligion_map <- function(counties, religion, religion_id) {\n  \n  headline <- ifelse(grepl(\"RATE\", as.character(religion_id)), paste(\"Rate of\", religion, \"followers\"), paste(religion, \"followers\"))\n  legend <- ifelse(grepl(\"RATE\", as.character(religion_id)), paste(religion, \"per 1,000 residents\"), \"Followers\")\n  \n  counties_sub <- counties\n  \n  names(counties_sub)[names(counties_sub) == religion_id] <- 'for_map'\n  \n  gg <- ggplot()\n  gg <- gg + geom_map(data=cmap, map=cmap,\n                      aes(x=long, y=lat,map_id=id),\n                      color=\"#2b2b2b\", size=0.05, fill=NA)\n  gg <- gg + geom_map(data=counties_sub, map=cmap,\n                      aes(fill=for_map, map_id=FIPS),\n                      color=\"#2b2b2b\", size=0.05)\n  gg <- gg + scale_fill_viridis(name=legend)\n  gg <- gg + coord_proj(us_laea_proj)\n  gg <- gg + labs(title=headline,\n                  caption=\"TrendCT.org\\nSOURCE: Association of Religion Data Archives 2010\")\n  gg <- gg + theme_map(base_family=\"Arial Narrow\")\n  gg <- gg + theme(legend.position=c(0.8, 0.25))\n  gg <- gg + theme(plot.title=element_text(face=\"bold\", size=14, margin=margin(b=6)))\n  gg <- gg + theme(plot.subtitle=element_text(size=10, margin=margin(b=-14)))\n  \n  gg\n}\n\nreligion_map(counties, \"Evangelicals\", \"EVANRATE\")\n",
+    "created" : 1482284532967.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4150180471",
+    "id" : "1AC918BA",
+    "lastKnownWriteTime" : 493921239040,
+    "last_content_update" : 1482332451330,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

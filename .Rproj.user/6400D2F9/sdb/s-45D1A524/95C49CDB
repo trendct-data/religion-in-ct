@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1482260384510.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "95C49CDB",
+    "lastKnownWriteTime" : 4319193088,
+    "last_content_update" : 1482260384510,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "D9ECB90F",
+        "caption" : "counties_rates",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=counties_rates&cache_key=D9ECB90F",
+        "displayedObservations" : 3149,
+        "environment" : "",
+        "object" : "counties_rates",
+        "preview" : 0,
+        "totalObservations" : 3149,
+        "variables" : 159
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1482260237057.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "646B902D",
+    "lastKnownWriteTime" : 7226435094589303907,
+    "last_content_update" : 1482260237057,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "42708D63",
+        "caption" : "counties_ct",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=counties_ct&cache_key=42708D63",
+        "displayedObservations" : 29,
+        "environment" : "",
+        "object" : "counties_ct",
+        "preview" : 0,
+        "totalObservations" : 29,
+        "variables" : 568
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

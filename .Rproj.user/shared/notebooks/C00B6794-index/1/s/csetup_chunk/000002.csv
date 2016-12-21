@@ -1,0 +1,39 @@
+"0","library(ggplot2)   # devtools::install_github(""hadley/ggplot2"") only if you want subtitles/captions
+library(stringr)
+library(dplyr)
+"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(tidyr)"
+"0","library(rgeos)"
+"2","rgeos version: 0.3-21, (SVN revision 540)
+ GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
+ Linking to sp version: 1.2-3 
+ Polygon checking: TRUE 
+
+"
+"0","library(maptools)"
+"2","package ‘maptools’ was built under R version 3.3.2"
+"2","Loading required package: sp
+"
+"2","Checking rgeos availability: TRUE
+"
+"0","library(ggalt)"
+"2","ggalt is under *active* development. See https://github.com/hrbrmstr/ggalt for changes
+"
+"0","library(ggthemes)"
+"0","library(albersusa) # devtools::install_github(""hrbrmstr/albersusa"")"
+"0","library(viridis)"
+"0","library(scales)"
